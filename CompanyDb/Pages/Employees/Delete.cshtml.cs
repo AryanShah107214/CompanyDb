@@ -21,19 +21,26 @@ namespace CompanyDb.Pages.Students
 
         [BindProperty]
         public Employee Employee { get; set; }
+        public string ErrorMessage { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(int? id, bool? saveChangesError = false)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            Employee = await _context.Employees.FirstOrDefaultAsync(m => m.EmployeeID == id);
+            Employee = await _context.Employees
+                .AsNoTracking()
+                .FirstOrDefaultAsync(m => m.EmployeeID == id);
 
             if (Employee == null)
             {
                 return NotFound();
+            }
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ErrorMessage = "Delete failed. Try again";
             }
             return Page();
         }
@@ -45,15 +52,25 @@ namespace CompanyDb.Pages.Students
                 return NotFound();
             }
 
-            Employee = await _context.Employees.FindAsync(id);
+            var employee = await _context.Employees.FindAsync(id);
 
-            if (Employee != null)
+            if (employee == null)
             {
-                _context.Employees.Remove(Employee);
-                await _context.SaveChangesAsync();
+                return NotFound();
             }
 
-            return RedirectToPage("./Index");
+            try
+            {
+                _context.Employees.Remove(employee);
+                await _context.SaveChangesAsync();
+                return RedirectToPage("./Index");
+            }
+            catch (DbUpdateException /* ex */)
+            {
+                //Log the error (uncomment ex variable name and write a log.)
+                return RedirectToAction("./Delete",
+                                     new { id, saveChangesError = true });
+            }
         }
-    }
+        }
 }

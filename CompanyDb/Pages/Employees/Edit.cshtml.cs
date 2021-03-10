@@ -30,7 +30,7 @@ namespace CompanyDb.Pages.Students
                 return NotFound();
             }
 
-            Employee = await _context.Employees.FirstOrDefaultAsync(m => m.EmployeeID == id);
+            Employee = await _context.Employees.FindAsync(id);
 
             if (Employee == null)
             {
@@ -39,34 +39,25 @@ namespace CompanyDb.Pages.Students
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int id)
         {
-            if (!ModelState.IsValid)
+            var employeeToUpdate = await _context.Employees.FindAsync(id);
+
+            if (employeeToUpdate == null)
             {
-                return Page();
+                return NotFound();
             }
 
-            _context.Attach(Employee).State = EntityState.Modified;
-
-            try
+            if (await TryUpdateModelAsync<Employee>(
+                employeeToUpdate,
+                "employee",
+                e => e.First_Middle_Name, e => e.LastName, e => e.HireDate, e=> e.StoreID))
             {
                 await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!EmployeeExists(Employee.EmployeeID))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return RedirectToPage("./Index");
             }
 
-            return RedirectToPage("./Index");
+            return Page();
         }
 
         private bool EmployeeExists(int id)

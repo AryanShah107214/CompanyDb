@@ -12,18 +12,53 @@ namespace CompanyDb.Pages.Students
 {
     public class IndexModel : PageModel
     {
-        private readonly CompanyDb.Data.StoreContext _context;
+        private readonly StoreContext _context;
 
-        public IndexModel(CompanyDb.Data.StoreContext context)
+        public IndexModel(StoreContext context)
         {
             _context = context;
         }
 
-        public IList<Employee> Employee { get;set; }
+        public string NameSort { get; set; }
+        public string DateSort { get; set; }
+        public string CurrentFilter { get; set; }
+        public string CurrentSort { get; set; }
 
-        public async Task OnGetAsync()
+        public IList<Employee> Employees { get; set; }
+
+        public async Task OnGetAsync(string sortOrder, string searchString)
         {
-            Employee = await _context.Employees.ToListAsync();
+            NameSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            DateSort = sortOrder == "Date" ? "date_desc" : "Date";
+
+            CurrentFilter = searchString;
+
+            IQueryable<Employee> employeesIQ = from e in _context.Employees
+                                             select e;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                employeesIQ = employeesIQ.Where(e => e.LastName.Contains(searchString)
+                                       || e.First_Middle_Name.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    employeesIQ = employeesIQ.OrderByDescending(e => e.LastName);
+                    break;
+                case "Date":
+                    employeesIQ = employeesIQ.OrderBy(e => e.HireDate);
+                    break;
+                case "date_desc":
+                    employeesIQ = employeesIQ.OrderByDescending(e => e.HireDate);
+                    break;
+                default:
+                    employeesIQ = employeesIQ.OrderBy(e => e.LastName);
+                    break;
+            }
+
+            Employees = await employeesIQ.AsNoTracking().ToListAsync();
         }
     }
 }
+

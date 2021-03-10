@@ -10,8 +10,8 @@ namespace CompanyDb.Models
     {
         public int StoreID { get; set; }
         public string StoreLocation { get; set; }
-        public int EmployeeID { get; set; }
+        public decimal ItemCost { get; set; }
+        public Sale Sale { get; set; }
 
-        public ICollection<Sale> Sales {get;set;}
     }
 }

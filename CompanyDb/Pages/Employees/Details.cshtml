@@ -1,4 +1,4 @@
-﻿@page
+﻿@page 
 @model CompanyDb.Pages.Students.DetailsModel
 
 @{
@@ -28,6 +28,31 @@
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Employee.HireDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Employee.StoreID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Employee.StoreID)
+        </dd>
+        <dd class="col-sm-10">
+            <table class="table">
+                <tr>
+                    <th>Sold Item Name</th>
+                    <th>Cost</th>
+                </tr>
+                @foreach (var item in Model.Employee.Stores)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Sale.ItemName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ItemCost)
+                        </td>
+                    </tr>
+                }
+            </table>
         </dd>
     </dl>
 </div>

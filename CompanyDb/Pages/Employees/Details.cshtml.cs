@@ -28,7 +28,11 @@ namespace CompanyDb.Pages.Students
                 return NotFound();
             }
 
-            Employee = await _context.Employees.FirstOrDefaultAsync(m => m.EmployeeID == id);
+            Employee = await _context.Employees
+        .Include(e => e.Stores)
+        .ThenInclude(s => s.Sale)
+        .AsNoTracking()
+        .FirstOrDefaultAsync(m => m.EmployeeID == id);
 
             if (Employee == null)
             {

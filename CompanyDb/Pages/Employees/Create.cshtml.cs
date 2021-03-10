@@ -31,15 +31,19 @@ namespace CompanyDb.Pages.Students
         // more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
+            var emptyEmployee = new Employee();
+
+            if (await TryUpdateModelAsync<Employee>(
+                emptyEmployee,
+                "employee",   // Prefix for form value.
+                e => e.First_Middle_Name, e => e.LastName, e => e.HireDate,e => e.StoreID))
             {
-                return Page();
+                _context.Employees.Add(emptyEmployee);
+                await _context.SaveChangesAsync();
+                return RedirectToPage("./Index");
             }
 
-            _context.Employees.Add(Employee);
-            await _context.SaveChangesAsync();
-
-            return RedirectToPage("./Index");
+            return Page();
         }
     }
 }
