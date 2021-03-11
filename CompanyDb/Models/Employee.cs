@@ -11,7 +11,7 @@ namespace CompanyDb.Models
         public string LastName { get; set; }
         public string First_Middle_Name { get; set; }
         public DateTime HireDate { get; set; }
-        public int StoreID { get; set; }
+        
 
 
         public ICollection<Store> Stores{ get; set; }

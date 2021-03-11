@@ -1,0 +1,31 @@
+﻿@page
+@model CompanyDb.Pages.AboutModel
+
+@{
+    ViewData["Title"] = "Employee Statistics";
+}
+
+<h2>Employee Stats</h2>
+
+<table>
+    <tr>
+        <th>
+            Hire Date
+        </th>
+        <th>
+            Employees
+        </th>
+    </tr>
+
+    @foreach (var item in Model.Employees)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.HireDate)
+            </td>
+            <td>
+                @item.EmployeeCount
+            </td>
+        </tr>
+    }
+</table>

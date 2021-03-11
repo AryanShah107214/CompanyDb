@@ -51,7 +51,7 @@ namespace CompanyDb.Pages.Students
             if (await TryUpdateModelAsync<Employee>(
                 employeeToUpdate,
                 "employee",
-                e => e.First_Middle_Name, e => e.LastName, e => e.HireDate, e=> e.StoreID))
+                e => e.First_Middle_Name, e => e.LastName, e => e.HireDate))
             {
                 await _context.SaveChangesAsync();
                 return RedirectToPage("./Index");

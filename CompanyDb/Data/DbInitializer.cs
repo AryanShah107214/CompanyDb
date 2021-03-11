@@ -22,14 +22,14 @@ namespace CompanyDb.Data
 
             var employees = new Employee[]//creates list of employees with their information to include on the website
             {
-                new Employee{EmployeeID=1, First_Middle_Name="Steven",LastName="King",HireDate=DateTime.Parse("2003-06-17"),StoreID=1},
-                new Employee{EmployeeID=2,First_Middle_Name="Neena",LastName="Kocchar",HireDate=DateTime.Parse("2007-09-04"),StoreID=2},
-                new Employee{EmployeeID=3,First_Middle_Name="Lex",LastName="De Haan",HireDate=DateTime.Parse("2006-09-03"),StoreID=3},
-                new Employee{EmployeeID=4,First_Middle_Name="Alexander",LastName="Hunold",HireDate=DateTime.Parse("2011-01-12"),StoreID=4},
-                new Employee{EmployeeID=5,First_Middle_Name="Bruce",LastName="Ernest",HireDate=DateTime.Parse("2017-03-04"),StoreID=5},
-                new Employee{EmployeeID=6,First_Middle_Name="David",LastName="Austin",HireDate=DateTime.Parse("2016-03-11"),StoreID=6},
-                new Employee{EmployeeID=7,First_Middle_Name="Valli",LastName="Pataballa",HireDate=DateTime.Parse("2014-02-01"),StoreID=7},
-                new Employee{EmployeeID=8,First_Middle_Name="Nino",LastName="Olivetto",HireDate=DateTime.Parse("2020-03-10"),StoreID=8}
+                new Employee{EmployeeID=1, First_Middle_Name="Steven",LastName="King",HireDate=DateTime.Parse("2003-06-17")},
+                new Employee{EmployeeID=2,First_Middle_Name="Neena",LastName="Kocchar",HireDate=DateTime.Parse("2007-09-04")},
+                new Employee{EmployeeID=3,First_Middle_Name="Lex",LastName="De Haan",HireDate=DateTime.Parse("2006-09-03")},
+                new Employee{EmployeeID=4,First_Middle_Name="Alexander",LastName="Hunold",HireDate=DateTime.Parse("2011-01-12")},
+                new Employee{EmployeeID=5,First_Middle_Name="Bruce",LastName="Ernest",HireDate=DateTime.Parse("2017-03-04")},
+                new Employee{EmployeeID=6,First_Middle_Name="David",LastName="Austin",HireDate=DateTime.Parse("2016-03-11")},
+                new Employee{EmployeeID=7,First_Middle_Name="Valli",LastName="Pataballa",HireDate=DateTime.Parse("2014-02-01")},
+                new Employee{EmployeeID=8,First_Middle_Name="Nino",LastName="Olivetto",HireDate=DateTime.Parse("2020-03-10")}
             };
 
             context.Employees.AddRange(employees);

@@ -36,7 +36,7 @@ namespace CompanyDb.Pages.Students
             if (await TryUpdateModelAsync<Employee>(
                 emptyEmployee,
                 "employee",   // Prefix for form value.
-                e => e.First_Middle_Name, e => e.LastName, e => e.HireDate,e => e.StoreID))
+                e => e.First_Middle_Name, e => e.LastName, e => e.HireDate))
             {
                 _context.Employees.Add(emptyEmployee);
                 await _context.SaveChangesAsync();

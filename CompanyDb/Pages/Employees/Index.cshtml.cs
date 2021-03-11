@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using CompanyDb.Data;
 using CompanyDb.Models;
 
-namespace CompanyDb.Pages.Students
+namespace CompanyDb.Pages.Employees
 {
     public class IndexModel : PageModel
     {
@@ -24,23 +24,32 @@ namespace CompanyDb.Pages.Students
         public string CurrentFilter { get; set; }
         public string CurrentSort { get; set; }
 
-        public IList<Employee> Employees { get; set; }
+        public PaginatedList<Employee> Employees{ get; set; }
 
-        public async Task OnGetAsync(string sortOrder, string searchString)
+        public async Task OnGetAsync(string sortOrder,
+            string currentFilter, string searchString, int? pageIndex)
         {
+            CurrentSort = sortOrder;
             NameSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             DateSort = sortOrder == "Date" ? "date_desc" : "Date";
+            if (searchString != null)
+            {
+                pageIndex = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
 
             CurrentFilter = searchString;
 
-            IQueryable<Employee> employeesIQ = from e in _context.Employees
-                                             select e;
+            IQueryable<Employee> employeesIQ = from s in _context.Employees
+                                             select s;
             if (!String.IsNullOrEmpty(searchString))
             {
                 employeesIQ = employeesIQ.Where(e => e.LastName.Contains(searchString)
                                        || e.First_Middle_Name.Contains(searchString));
             }
-
             switch (sortOrder)
             {
                 case "name_desc":
@@ -57,8 +66,11 @@ namespace CompanyDb.Pages.Students
                     break;
             }
 
-            Employees = await employeesIQ.AsNoTracking().ToListAsync();
+            int pageSize = 3;
+            Employees = await PaginatedList<Employee>.CreateAsync(
+                employeesIQ.AsNoTracking(), pageIndex ?? 1, pageSize);
         }
     }
 }
+
 
