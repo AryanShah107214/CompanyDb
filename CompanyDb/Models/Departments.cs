@@ -7,7 +7,8 @@ namespace CompanyDb.Models
 {
     public class Departments
     {
-        public int DeptID { get; set; }
+        
+        public int DepartmentsID { get; set; }
         public string DepartmentName { get; set; }
         
     }

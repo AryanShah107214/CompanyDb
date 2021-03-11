@@ -12,7 +12,7 @@ namespace CompanyDb.Data
     {
         public static void Initialize(StoreContext context)
         {
-            context.Database.EnsureCreated();
+            //context.Database.EnsureCreated();
 
             // Checks if there are employees
             if (context.Employees.Any())

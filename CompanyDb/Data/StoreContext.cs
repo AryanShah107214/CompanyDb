@@ -17,12 +17,14 @@ namespace CompanyDb.Data
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Sale> Sales{ get; set; }
         public DbSet<Store> Stores{ get; set; }
+        public DbSet<Departments> Department { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Store>().ToTable("Store");
             modelBuilder.Entity<Sale>().ToTable("Sale");
             modelBuilder.Entity<Employee>().ToTable("Employee");
+            modelBuilder.Entity<Employee>().ToTable("Department");
         }
 
     }
