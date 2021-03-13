@@ -64,9 +64,27 @@ namespace CompanyDb.Data
                 new Sale{SaleID=6,StoreID=1045},
                 new Sale{SaleID=7,StoreID=3141},
             };
-
             context.Sales.AddRange(sales);
             context.SaveChanges();
+
+            if (context.Departments.Any())
+            {
+                return;  
+            }
+
+            var departments = new Department[]
+            {
+                new Department{DepartmentID=1,DepartmentName="itDept"},
+                new Department{DepartmentID=2,DepartmentName="SalesDept"},
+                new Department{DepartmentID=3,DepartmentName="Marketing"},
+                new Department{DepartmentID=4,DepartmentName="Admin"},
+                new Department{DepartmentID=3,DepartmentName="BoT"},
+
+            };
+            context.Departments.AddRange(departments);
+            context.SaveChanges();
+
+            
         }
     }
 }

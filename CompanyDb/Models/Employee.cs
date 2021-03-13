@@ -7,8 +7,8 @@ namespace CompanyDb.Models
 {
     public class Employee
     {
-        public int EmployeeID { get; set; }
-        [Required]
+        public int EmployeeID { get; set; }//The PK
+        [Required]//Tells us it is required i.e. can not be NULL
         [StringLength(50)]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
