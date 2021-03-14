@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using CompanyDb.Data;
 using CompanyDb.Models;
 
-namespace CompanyDb.Pages.Stores
+namespace CompanyDb.Pages.DepartmentsStores
 {
     public class DeleteModel : PageModel
     {
@@ -20,21 +20,20 @@ namespace CompanyDb.Pages.Stores
         }
 
         [BindProperty]
-        public Store Store { get; set; }
-        public string ErrorMessage { get; set; }
+        public DepartmentStore DepartmentStore { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(string? id, bool? saveChangesError = false)
+        public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            Store = await _context.Stores
-                .AsNoTracking()
-                .FirstOrDefaultAsync(m => m.StoreID == id);
+            DepartmentStore = await _context.DepartmentStore
+                .Include(d => d.Department)
+                .Include(d => d.Store).FirstOrDefaultAsync(m => m.DepartmentStoreID == id);
 
-            if (Store == null)
+            if (DepartmentStore == null)
             {
                 return NotFound();
             }
@@ -48,25 +47,15 @@ namespace CompanyDb.Pages.Stores
                 return NotFound();
             }
 
-            var store = await _context.Stores.FindAsync(id);
+            DepartmentStore = await _context.DepartmentStore.FindAsync(id);
 
-            if (store == null)
+            if (DepartmentStore != null)
             {
-                return NotFound();
-            }
-
-            try
-            {
-                _context.Stores.Remove(store);
+                _context.DepartmentStore.Remove(DepartmentStore);
                 await _context.SaveChangesAsync();
-                return RedirectToPage("./Index");
             }
-            catch (DbUpdateException /* ex */)
-            {
-                //Log the error (uncomment ex variable name and write a log.)
-                return RedirectToAction("./Delete",
-                                     new { id, saveChangesError = true });
-            }
+
+            return RedirectToPage("./Index");
         }
     }
 }

@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using CompanyDb.Data;
 using CompanyDb.Models;
 
-namespace CompanyDb.Pages.Stores
+namespace CompanyDb.Pages.DepartmentsStores
 {
     public class CreateModel : PageModel
     {
@@ -21,11 +21,13 @@ namespace CompanyDb.Pages.Stores
 
         public IActionResult OnGet()
         {
+        ViewData["DepartmentID"] = new SelectList(_context.Departments, "DepartmentID", "DepartmentName");
+        ViewData["StoreID"] = new SelectList(_context.Stores, "StoreID", "StoreID");
             return Page();
         }
 
         [BindProperty]
-        public Store Store { get; set; }
+        public DepartmentStore DepartmentStore { get; set; }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
@@ -36,7 +38,7 @@ namespace CompanyDb.Pages.Stores
                 return Page();
             }
 
-            _context.Stores.Add(Store);
+            _context.DepartmentStore.Add(DepartmentStore);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
