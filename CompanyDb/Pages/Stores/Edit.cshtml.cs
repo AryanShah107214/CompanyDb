@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using CompanyDb.Data;
 using CompanyDb.Models;
 
-namespace CompanyDb.Pages.Departments
+namespace CompanyDb.Pages.Stores
 {
     public class EditModel : PageModel
     {
@@ -21,18 +21,18 @@ namespace CompanyDb.Pages.Departments
         }
 
         [BindProperty]
-        public Department Department { get; set; }
+        public Store Store { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(string id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            Department = await _context.Departments.FindAsync(id);
+            Store = await _context.Stores.FindAsync(id);
 
-            if (Department == null)
+            if (Store == null)
             {
                 return NotFound();
             }
@@ -41,17 +41,17 @@ namespace CompanyDb.Pages.Departments
 
         public async Task<IActionResult> OnPostAsync(int id)
         {
-            var departmentToUpdate = await _context.Departments.FindAsync(id);
+            var storeToUpdate = await _context.Stores.FindAsync(id);
 
-            if (departmentToUpdate == null)
+            if (storeToUpdate == null)
             {
                 return NotFound();
             }
 
-            if (await TryUpdateModelAsync<Department>(
-                departmentToUpdate,
-                "department",
-                d => d.DepartmentName, d => d.StoreID))
+            if (await TryUpdateModelAsync<Store>(
+                storeToUpdate,
+                "store",
+                s => s.StoreLocation, s => s.ItemCost))
             {
                 await _context.SaveChangesAsync();
                 return RedirectToPage("./Index");
@@ -60,9 +60,9 @@ namespace CompanyDb.Pages.Departments
             return Page();
         }
 
-        private bool DepartmentExists(int id)
+        private bool StoreExists(string id)
         {
-            return _context.Departments.Any(d => d.DepartmentID == id);
+            return _context.Stores.Any(s => s.StoreID == id);
         }
     }
 }

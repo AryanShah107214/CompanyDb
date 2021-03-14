@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using CompanyDb.Data;
 using CompanyDb.Models;
 
-namespace CompanyDb.Pages.Departments
+namespace CompanyDb.Pages.Stores
 {
     public class CreateModel : PageModel
     {
@@ -21,30 +21,25 @@ namespace CompanyDb.Pages.Departments
 
         public IActionResult OnGet()
         {
-        ViewData["StoreID"] = new SelectList(_context.Stores, "StoreID", "StoreID");
             return Page();
         }
 
         [BindProperty]
-        public Department Department { get; set; }
+        public Store Store { get; set; }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            var emptyDepartment = new Department();
-
-            if (await TryUpdateModelAsync<Department>(
-                emptyDepartment,
-                "department",   // Prefix for form value.
-                d => d.DepartmentName, d => d.StoreID))
+            if (!ModelState.IsValid)
             {
-                _context.Departments.Add(emptyDepartment);
-                await _context.SaveChangesAsync();
-                return RedirectToPage("./Index");
+                return Page();
             }
 
-            return Page();
+            _context.Stores.Add(Store);
+            await _context.SaveChangesAsync();
+
+            return RedirectToPage("./Index");
         }
     }
 }

@@ -5,7 +5,7 @@
     ViewData["Title"] = "Departments";
 }
 
-<h2>Departments</h2>
+<h1>Departments</h1>
 
 <p>
     <a asp-page="Create">Create New</a>
@@ -26,50 +26,35 @@
     <thead>
         <tr>
             <th>
-                <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort"
-                   asp-route-currentFilter="@Model.CurrentFilter">
-                    @Html.DisplayNameFor(model => model.Departments[0].DepartmentName)
-                </a>
+                @Html.DisplayNameFor(model => model.Departments[0].DepartmentName)
             </th>
-            
-            
+            <th>
+                @Html.DisplayNameFor(model => model.Departments[0].NumberOfEmployees)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Departments[0].Store)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Departments)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DepartmentName)
-                </td>
-                
-                <td>
-                    <a asp-page="./Edit" asp-route-id="@item.DepartmentID">Edit</a> |
-                    <a asp-page="./Details" asp-route-id="@item.DepartmentID">Details</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.DepartmentID">Delete</a>
-                </td>
-            </tr>
-        }
+@foreach (var item in Model.Departments) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepartmentName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberOfEmployees)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Store.StoreID)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.DepartmentID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.DepartmentID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.DepartmentID">Delete</a>
+            </td>
+        </tr>
+}
     </tbody>
 </table>
-
-@{
-    var prevDisabled = !Model.Departments.HasPreviousPage ? "disabled" : "";
-    var nextDisabled = !Model.Departments.HasNextPage ? "disabled" : "";
-}
-
-<a asp-page="./Index"
-   asp-route-sortOrder="@Model.CurrentSort"
-   asp-route-pageIndex="@(Model.Departments.PageIndex - 1)"
-   asp-route-currentFilter="@Model.CurrentFilter"
-   class="btn btn-primary @prevDisabled">
-    Previous
-</a>
-<a asp-page="./Index"
-   asp-route-sortOrder="@Model.CurrentSort"
-   asp-route-pageIndex="@(Model.Departments.PageIndex + 1)"
-   asp-route-currentFilter="@Model.CurrentFilter"
-   class="btn btn-primary @nextDisabled">
-    Next
-</a>

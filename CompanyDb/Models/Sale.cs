@@ -21,7 +21,7 @@ namespace CompanyDb.Models
         public int StoreID { get; set; }//This company has multiple stores so it is required to keep track of the storeID.
         public decimal ItemCost { get; set; }
         public Employee Employee { get; set; }
-        public Store Store { get; set; }
+        
         
     }
 }

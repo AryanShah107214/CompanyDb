@@ -17,6 +17,19 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Department.DepartmentName)
         </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Department.NumberOfEmployees)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Department.NumberOfEmployees)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Department.Store)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Department.Store.StoreID)
+        </dd>
+        
     </dl>
 </div>
 <div>

@@ -1,10 +1,14 @@
-﻿using CompanyDb.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
+using CompanyDb.Data;
+using CompanyDb.Models;
 
-namespace CompanyDb.Pages.Departments
+namespace CompanyDb.Pages.Stores
 {
     public class DeleteModel : PageModel
     {
@@ -16,30 +20,24 @@ namespace CompanyDb.Pages.Departments
         }
 
         [BindProperty]
-        public Department Department { get; set; }
+        public Store Store { get; set; }
         public string ErrorMessage { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id, bool? saveChangesError = false)
+        public async Task<IActionResult> OnGetAsync(string? id, bool? saveChangesError = false)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            Department = await _context.Departments
+            Store = await _context.Stores
                 .AsNoTracking()
-                .FirstOrDefaultAsync(m => m.DepartmentID == id);
+                .FirstOrDefaultAsync(m => m.StoreID == id);
 
-            if (Department == null)
+            if (Store == null)
             {
                 return NotFound();
             }
-
-            if (saveChangesError.GetValueOrDefault())
-            {
-                ErrorMessage = "Delete failed. Try again";
-            }
-
             return Page();
         }
 
@@ -50,16 +48,16 @@ namespace CompanyDb.Pages.Departments
                 return NotFound();
             }
 
-            var department = await _context.Departments.FindAsync(id);
+            var store = await _context.Stores.FindAsync(id);
 
-            if (department == null)
+            if (store == null)
             {
                 return NotFound();
             }
 
             try
             {
-                _context.Departments.Remove(department);
+                _context.Stores.Remove(store);
                 await _context.SaveChangesAsync();
                 return RedirectToPage("./Index");
             }

@@ -9,10 +9,10 @@ namespace CompanyDb.Models
 {
     public class Store
     {
-        public int StoreID { get; set; }
+        public string StoreID { get; set; }
         public string StoreLocation { get; set; }
         public decimal ItemCost { get; set; }
+       
         public Sale Sale { get; set; }
-
     }
 }

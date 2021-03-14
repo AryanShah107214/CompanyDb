@@ -37,13 +37,13 @@ namespace CompanyDb.Data
 
             var stores = new Store[]
             {
-                new Store{StoreID=1050,StoreLocation="Onehunga"},
-                new Store{StoreID=4022,StoreLocation="New Lynn"},
-                new Store{StoreID=4041,StoreLocation="Avondale"},
-                new Store{StoreID=1045,StoreLocation="Kelston"},
-                new Store{StoreID=3141,StoreLocation="Glen Eden"},
-                new Store{StoreID=2021,StoreLocation="Glendene"},
-                new Store{StoreID=2042,StoreLocation="Henderson"}
+                new Store{StoreID="Store-ONHA",StoreLocation="Onehunga"},
+                new Store{StoreID="Store-NLN",StoreLocation="New Lynn"},
+                new Store{StoreID="Store-AVDL",StoreLocation="Avondale"},
+                new Store{StoreID="Store-KTN",StoreLocation="Kelston"},
+                new Store{StoreID="Store-GEN",StoreLocation="Glen Eden"},
+                new Store{StoreID="Store-GNE",StoreLocation="Glendene"},
+                new Store{StoreID="Store-HSN",StoreLocation="Henderson"}
             };
 
             context.Stores.AddRange(stores);
@@ -85,6 +85,7 @@ namespace CompanyDb.Data
             context.SaveChanges();
 
             
+
         }
     }
 }

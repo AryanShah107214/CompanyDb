@@ -7,14 +7,17 @@ namespace CompanyDb.Models
 {
     public class Department
     {
-        public int DepartmentID { get; set; }
-
-        [Required]
-        [Display(Name = "Department Name")]
+        public int DepartmentID { get; set; }//The PK
+        [Required]//Tells us it is required i.e. can not be NULL
         [StringLength(50)]
+        [Display(Name = "Department Name")]
         public string DepartmentName { get; set; }
+        [Required]
+        public int NumberOfEmployees { get; set; }
 
         
+        public string StoreID { get; set; }
+        public Store Store { get; set; }
         
     }
 }

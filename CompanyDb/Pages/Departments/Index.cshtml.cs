@@ -12,25 +12,25 @@ namespace CompanyDb.Pages.Departments
 {
     public class IndexModel : PageModel
     {
-        private readonly CompanyDb.Data.StoreContext _context;
-
-        public IndexModel(CompanyDb.Data.StoreContext context)
+        private readonly StoreContext _context;
+        public IndexModel(StoreContext context)
         {
             _context = context;
         }
 
         public string NameSort { get; set; }
-        //public string DateSort { get; set; }
+        public string DateSort { get; set; }
         public string CurrentFilter { get; set; }
         public string CurrentSort { get; set; }
-        public PaginatedList<Department> Departments { get; private set; }
+
+        public PaginatedList<Department> Departments { get; set; }
 
         public async Task OnGetAsync(string sortOrder,
             string currentFilter, string searchString, int? pageIndex)
         {
             CurrentSort = sortOrder;
             NameSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            //DateSort = sortOrder == "Date" ? "date_desc" : "Date";
+            DateSort = sortOrder == "Date" ? "date_desc" : "Date";
             if (searchString != null)
             {
                 pageIndex = 1;
@@ -39,19 +39,27 @@ namespace CompanyDb.Pages.Departments
             {
                 searchString = currentFilter;
             }
-
             CurrentFilter = searchString;
 
-            IQueryable<Department> departmentsIQ = from d in _context.Departments
-                                               select d;
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                departmentsIQ = departmentsIQ.Where(d => d.DepartmentName.Contains(searchString));
-            }
-            switch (sortOrder)
+                IQueryable<Department> departmentsIQ = from d in _context.Departments
+                                             select d;
+
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    departmentsIQ = departmentsIQ.Where(d => d.DepartmentName.Contains(searchString)
+                                           || d.StoreID.Contains(searchString));
+                }
+
+                switch (sortOrder)
             {
                 case "name_desc":
                     departmentsIQ = departmentsIQ.OrderByDescending(d => d.DepartmentName);
+                    break;
+                case "ID":
+                    departmentsIQ = departmentsIQ.OrderByDescending(d => d.StoreID);
+                    break;
+                default:
+                    departmentsIQ = departmentsIQ.OrderBy(d => d.DepartmentName);
                     break;
             }
 
