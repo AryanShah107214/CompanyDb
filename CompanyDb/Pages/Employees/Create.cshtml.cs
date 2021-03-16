@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using CompanyDb.Data;
 using CompanyDb.Models;
 
-namespace CompanyDb.Pages.Students
+namespace CompanyDb.Pages.NewFolder
 {
     public class CreateModel : PageModel
     {
@@ -31,19 +31,15 @@ namespace CompanyDb.Pages.Students
         // more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            var emptyEmployee = new Employee();
-
-            if (await TryUpdateModelAsync<Employee>(
-                emptyEmployee,
-                "employee",   // Prefix for form value.
-                e => e.First_Middle_Name, e => e.LastName, e => e.HireDate))
+            if (!ModelState.IsValid)
             {
-                _context.Employees.Add(emptyEmployee);
-                await _context.SaveChangesAsync();
-                return RedirectToPage("./Index");
+                return Page();
             }
 
-            return Page();
+            _context.Employees.Add(Employee);
+            await _context.SaveChangesAsync();
+
+            return RedirectToPage("./Index");
         }
     }
 }

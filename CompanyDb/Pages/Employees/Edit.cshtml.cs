@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using CompanyDb.Data;
 using CompanyDb.Models;
 
-namespace CompanyDb.Pages.Students
+namespace CompanyDb.Pages.NewFolder
 {
     public class EditModel : PageModel
     {
@@ -30,7 +30,7 @@ namespace CompanyDb.Pages.Students
                 return NotFound();
             }
 
-            Employee = await _context.Employees.FindAsync(id);
+            Employee = await _context.Employees.FirstOrDefaultAsync(m => m.EmployeeID == id);
 
             if (Employee == null)
             {
@@ -39,25 +39,34 @@ namespace CompanyDb.Pages.Students
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int id)
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
+        // more details, see https://aka.ms/RazorPagesCRUD.
+        public async Task<IActionResult> OnPostAsync()
         {
-            var employeeToUpdate = await _context.Employees.FindAsync(id);
-
-            if (employeeToUpdate == null)
+            if (!ModelState.IsValid)
             {
-                return NotFound();
+                return Page();
             }
 
-            if (await TryUpdateModelAsync<Employee>(
-                employeeToUpdate,
-                "employee",
-                e => e.First_Middle_Name, e => e.LastName, e => e.HireDate))
+            _context.Attach(Employee).State = EntityState.Modified;
+
+            try
             {
                 await _context.SaveChangesAsync();
-                return RedirectToPage("./Index");
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!EmployeeExists(Employee.EmployeeID))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
             }
 
-            return Page();
+            return RedirectToPage("./Index");
         }
 
         private bool EmployeeExists(int id)

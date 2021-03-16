@@ -30,6 +30,8 @@ namespace CompanyDb.Models
             }
         }
 
-        public ICollection<Store> Stores { get; set; }
+        public int StoreID { get; set; }
+
+        public Store Store { get; set; }
     }
 }

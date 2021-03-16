@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using CompanyDb.Data;
 using CompanyDb.Models;
 
-namespace CompanyDb.Pages.Students
+namespace CompanyDb.Pages.NewFolder
 {
     public class DeleteModel : PageModel
     {
@@ -21,26 +21,19 @@ namespace CompanyDb.Pages.Students
 
         [BindProperty]
         public Employee Employee { get; set; }
-        public string ErrorMessage { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id, bool? saveChangesError = false)
+        public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            Employee = await _context.Employees
-                .AsNoTracking()
-                .FirstOrDefaultAsync(m => m.EmployeeID == id);
+            Employee = await _context.Employees.FirstOrDefaultAsync(m => m.EmployeeID == id);
 
             if (Employee == null)
             {
                 return NotFound();
-            }
-            if (saveChangesError.GetValueOrDefault())
-            {
-                ErrorMessage = "Delete failed. Try again";
             }
             return Page();
         }
@@ -52,25 +45,15 @@ namespace CompanyDb.Pages.Students
                 return NotFound();
             }
 
-            var employee = await _context.Employees.FindAsync(id);
+            Employee = await _context.Employees.FindAsync(id);
 
-            if (employee == null)
+            if (Employee != null)
             {
-                return NotFound();
-            }
-
-            try
-            {
-                _context.Employees.Remove(employee);
+                _context.Employees.Remove(Employee);
                 await _context.SaveChangesAsync();
-                return RedirectToPage("./Index");
             }
-            catch (DbUpdateException /* ex */)
-            {
-                //Log the error (uncomment ex variable name and write a log.)
-                return RedirectToAction("./Delete",
-                                     new { id, saveChangesError = true });
-            }
+
+            return RedirectToPage("./Index");
         }
-        }
+    }
 }

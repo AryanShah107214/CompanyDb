@@ -1,5 +1,5 @@
 ﻿@page
-@model CompanyDb.Pages.Students.CreateModel
+@model CompanyDb.Pages.NewFolder.CreateModel
 
 @{
     ViewData["Title"] = "Create";
@@ -28,8 +28,11 @@
                 <input asp-for="Employee.HireDate" class="form-control" />
                 <span asp-validation-for="Employee.HireDate" class="text-danger"></span>
             </div>
-           
-            
+            <div class="form-group">
+                <label asp-for="Employee.StoreID" class="control-label"></label>
+                <input asp-for="Employee.StoreID" class="form-control" />
+                <span asp-validation-for="Employee.StoreID" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
