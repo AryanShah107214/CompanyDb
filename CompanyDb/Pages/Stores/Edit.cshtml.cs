@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using CompanyDb.Data;
 using CompanyDb.Models;
 
-namespace CompanyDb.Pages.Departments
+namespace CompanyDb.Pages.Stores
 {
     public class EditModel : PageModel
     {
@@ -21,7 +21,7 @@ namespace CompanyDb.Pages.Departments
         }
 
         [BindProperty]
-        public Department Department { get; set; }
+        public Store Store { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -30,9 +30,9 @@ namespace CompanyDb.Pages.Departments
                 return NotFound();
             }
 
-            Department = await _context.Departments.FirstOrDefaultAsync(m => m.DepartmentID == id);
+            Store = await _context.Stores.FirstOrDefaultAsync(m => m.StoreID == id);
 
-            if (Department == null)
+            if (Store == null)
             {
                 return NotFound();
             }
@@ -48,7 +48,7 @@ namespace CompanyDb.Pages.Departments
                 return Page();
             }
 
-            _context.Attach(Department).State = EntityState.Modified;
+            _context.Attach(Store).State = EntityState.Modified;
 
             try
             {
@@ -56,7 +56,7 @@ namespace CompanyDb.Pages.Departments
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!DepartmentExists(Department.DepartmentID))
+                if (!StoreExists(Store.StoreID))
                 {
                     return NotFound();
                 }
@@ -69,9 +69,9 @@ namespace CompanyDb.Pages.Departments
             return RedirectToPage("./Index");
         }
 
-        private bool DepartmentExists(int id)
+        private bool StoreExists(int id)
         {
-            return _context.Departments.Any(e => e.DepartmentID == id);
+            return _context.Stores.Any(e => e.StoreID == id);
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿@page
-@model CompanyDb.Pages.DepartmentsStores.CreateModel
+@model CompanyDb.Pages.Stores.CreateModel
 
 @{
     ViewData["Title"] = "Create";
@@ -7,19 +7,21 @@
 
 <h1>Create</h1>
 
-<h4>DepartmentStore</h4>
+<h4>Store</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="DepartmentStore.DepartmentID" class="control-label"></label>
-                <select asp-for="DepartmentStore.DepartmentID" class ="form-control" asp-items="ViewBag.DepartmentID"></select>
+                <label asp-for="Store.StoreLocation" class="control-label"></label>
+                <input asp-for="Store.StoreLocation" class="form-control" />
+                <span asp-validation-for="Store.StoreLocation" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DepartmentStore.StoreID" class="control-label"></label>
-                <select asp-for="DepartmentStore.StoreID" class ="form-control" asp-items="ViewBag.StoreID"></select>
+                <label asp-for="Store.StoreAddress" class="control-label"></label>
+                <input asp-for="Store.StoreAddress" class="form-control" />
+                <span asp-validation-for="Store.StoreAddress" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

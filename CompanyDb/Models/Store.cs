@@ -11,11 +11,9 @@ namespace CompanyDb.Models
     {
         public int StoreID { get; set; }
         public string StoreLocation { get; set; }
-        public decimal ItemCost { get; set; }
+        public string StoreAddress { get; set; }
      
        
         public Employee Employee { get; set; }
-        public Sale Sale { get; set; }
-        public Department Department { get; set; }
     }
 }

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using CompanyDb.Data;
 using CompanyDb.Models;
 
-namespace CompanyDb.Pages.Departments
+namespace CompanyDb.Pages.Stores
 {
     public class DetailsModel : PageModel
     {
@@ -19,7 +19,7 @@ namespace CompanyDb.Pages.Departments
             _context = context;
         }
 
-        public Department Department { get; set; }
+        public Store Store { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -28,9 +28,9 @@ namespace CompanyDb.Pages.Departments
                 return NotFound();
             }
 
-            Department = await _context.Departments.FirstOrDefaultAsync(m => m.DepartmentID == id);
+            Store = await _context.Stores.FirstOrDefaultAsync(m => m.StoreID == id);
 
-            if (Department == null)
+            if (Store == null)
             {
                 return NotFound();
             }

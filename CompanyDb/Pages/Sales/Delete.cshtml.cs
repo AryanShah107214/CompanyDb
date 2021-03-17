@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using CompanyDb.Data;
 using CompanyDb.Models;
 
-namespace CompanyDb.Pages.DepartmentsStores
+namespace CompanyDb.Pages.Sales
 {
     public class DeleteModel : PageModel
     {
@@ -20,7 +20,7 @@ namespace CompanyDb.Pages.DepartmentsStores
         }
 
         [BindProperty]
-        public DepartmentStore DepartmentStore { get; set; }
+        public Sale Sale { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -29,11 +29,11 @@ namespace CompanyDb.Pages.DepartmentsStores
                 return NotFound();
             }
 
-            DepartmentStore = await _context.DepartmentStore
-                .Include(d => d.Department)
-                .Include(d => d.Store).FirstOrDefaultAsync(m => m.DepartmentStoreID == id);
+            Sale = await _context.Sales
+                .Include(s => s.Employee)
+                .Include(s => s.Store).FirstOrDefaultAsync(m => m.SaleID == id);
 
-            if (DepartmentStore == null)
+            if (Sale == null)
             {
                 return NotFound();
             }
@@ -47,11 +47,11 @@ namespace CompanyDb.Pages.DepartmentsStores
                 return NotFound();
             }
 
-            DepartmentStore = await _context.DepartmentStore.FindAsync(id);
+            Sale = await _context.Sales.FindAsync(id);
 
-            if (DepartmentStore != null)
+            if (Sale != null)
             {
-                _context.DepartmentStore.Remove(DepartmentStore);
+                _context.Sales.Remove(Sale);
                 await _context.SaveChangesAsync();
             }
 

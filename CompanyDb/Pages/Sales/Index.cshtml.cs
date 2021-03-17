@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using CompanyDb.Data;
 using CompanyDb.Models;
 
-namespace CompanyDb.Pages.Departments
+namespace CompanyDb.Pages.Sales
 {
     public class IndexModel : PageModel
     {
@@ -19,11 +19,13 @@ namespace CompanyDb.Pages.Departments
             _context = context;
         }
 
-        public IList<Department> Department { get;set; }
+        public IList<Sale> Sale { get;set; }
 
         public async Task OnGetAsync()
         {
-            Department = await _context.Departments.ToListAsync();
+            Sale = await _context.Sales
+                .Include(s => s.Employee)
+                .Include(s => s.Store).ToListAsync();
         }
     }
 }

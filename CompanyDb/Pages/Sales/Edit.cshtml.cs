@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using CompanyDb.Data;
 using CompanyDb.Models;
 
-namespace CompanyDb.Pages.DepartmentsStores
+namespace CompanyDb.Pages.Sales
 {
     public class EditModel : PageModel
     {
@@ -21,7 +21,7 @@ namespace CompanyDb.Pages.DepartmentsStores
         }
 
         [BindProperty]
-        public DepartmentStore DepartmentStore { get; set; }
+        public Sale Sale { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -30,15 +30,15 @@ namespace CompanyDb.Pages.DepartmentsStores
                 return NotFound();
             }
 
-            DepartmentStore = await _context.DepartmentStore
-                .Include(d => d.Department)
-                .Include(d => d.Store).FirstOrDefaultAsync(m => m.DepartmentStoreID == id);
+            Sale = await _context.Sales
+                .Include(s => s.Employee)
+                .Include(s => s.Store).FirstOrDefaultAsync(m => m.SaleID == id);
 
-            if (DepartmentStore == null)
+            if (Sale == null)
             {
                 return NotFound();
             }
-           ViewData["DepartmentID"] = new SelectList(_context.Departments, "DepartmentID", "DepartmentName");
+           ViewData["EmployeeID"] = new SelectList(_context.Employees, "EmployeeID", "First_Middle_Name");
            ViewData["StoreID"] = new SelectList(_context.Stores, "StoreID", "StoreID");
             return Page();
         }
@@ -52,7 +52,7 @@ namespace CompanyDb.Pages.DepartmentsStores
                 return Page();
             }
 
-            _context.Attach(DepartmentStore).State = EntityState.Modified;
+            _context.Attach(Sale).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace CompanyDb.Pages.DepartmentsStores
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!DepartmentStoreExists(DepartmentStore.DepartmentStoreID))
+                if (!SaleExists(Sale.SaleID))
                 {
                     return NotFound();
                 }
@@ -73,9 +73,9 @@ namespace CompanyDb.Pages.DepartmentsStores
             return RedirectToPage("./Index");
         }
 
-        private bool DepartmentStoreExists(int id)
+        private bool SaleExists(int id)
         {
-            return _context.DepartmentStore.Any(e => e.DepartmentStoreID == id);
+            return _context.Sales.Any(e => e.SaleID == id);
         }
     }
 }

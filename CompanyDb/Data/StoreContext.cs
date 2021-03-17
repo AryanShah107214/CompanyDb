@@ -27,7 +27,7 @@ namespace CompanyDb.Data
             modelBuilder.Entity<Department>().ToTable("Department");
         }
 
-        public DbSet<CompanyDb.Models.DepartmentStore> DepartmentStore { get; set; }
+        
 
     }
 }

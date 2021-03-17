@@ -2,43 +2,31 @@
 @model CompanyDb.Pages.Departments.IndexModel
 
 @{
-    ViewData["Title"] = "Departments";
+    ViewData["Title"] = "Index";
 }
 
-<h1>Departments</h1>
+<h1>Index</h1>
 
 <p>
     <a asp-page="Create">Create New</a>
 </p>
-
-<form asp-page="./Index" method="get">
-    <div class="form-actions no-color">
-        <p>
-            Find by name:
-            <input type="text" name="SearchString" value="@Model.CurrentFilter" />
-            <input type="submit" value="Search" class="btn btn-primary" /> |
-            <a asp-page="./Index">Back to full List</a>
-        </p>
-    </div>
-</form>
-
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Departments[0].DepartmentName)
+                @Html.DisplayNameFor(model => model.Department[0].DepartmentName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Departments[0].NumberOfEmployees)
+                @Html.DisplayNameFor(model => model.Department[0].NumberOfEmployees)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Departments[0].Store)
+                @Html.DisplayNameFor(model => model.Department[0].StoreID)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Departments) {
+@foreach (var item in Model.Department) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.DepartmentName)
@@ -47,7 +35,7 @@
                 @Html.DisplayFor(modelItem => item.NumberOfEmployees)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Store.StoreID)
+                @Html.DisplayFor(modelItem => item.StoreID)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.DepartmentID">Edit</a> |
