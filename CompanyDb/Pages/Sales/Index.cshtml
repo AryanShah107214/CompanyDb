@@ -2,10 +2,10 @@
 @model CompanyDb.Pages.Sales.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Sales";
 }
 
-<h1>Index</h1>
+<h1>Sales</h1>
 
 <p>
     <a asp-page="Create">Create New</a>
@@ -35,7 +35,7 @@
                 @Html.DisplayFor(modelItem => item.ItemCost)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Store.StoreID)
+                @Html.DisplayFor(modelItem => item.Store.StoreLocation)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.SaleID">Edit</a> |

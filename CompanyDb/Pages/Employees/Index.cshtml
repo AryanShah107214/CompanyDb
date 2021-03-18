@@ -44,10 +44,12 @@
                 @Html.DisplayFor(modelItem => item.HireDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DepartmentID)
+                @Html.DisplayFor(modelItem => item.Department.DepartmentName)
+
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.StoreID)
+                @Html.DisplayFor(modelItem => item.Store.StoreLocation)
+                
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.EmployeeID">Edit</a> |

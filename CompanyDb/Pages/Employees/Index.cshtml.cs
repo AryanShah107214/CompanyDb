@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using CompanyDb.Data;
 using CompanyDb.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CompanyDb.Pages.Employees
 {
@@ -26,6 +27,8 @@ namespace CompanyDb.Pages.Employees
             Employee = await _context.Employees
                 .Include(e => e.Department)
                 .Include(e => e.Store).ToListAsync();
+            ViewData["DepartmentID"] = new SelectList(_context.Departments, "DepartmentID", "DepartmentName");
+            ViewData["StoreID"] = new SelectList(_context.Stores, "StoreID", "StoreLocation");
         }
     }
 }

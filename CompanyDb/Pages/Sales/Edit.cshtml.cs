@@ -37,7 +37,7 @@ namespace CompanyDb.Pages.Sales
             {
                 return NotFound();
             }
-           ViewData["StoreID"] = new SelectList(_context.Stores, "StoreID", "StoreID");
+           ViewData["StoreID"] = new SelectList(_context.Stores, "StoreID", "StoreLocation");
             return Page();
         }
 
