@@ -39,7 +39,7 @@ namespace CompanyDb.Pages.Employees
                 return NotFound();
             }
            ViewData["DepartmentID"] = new SelectList(_context.Departments, "DepartmentID", "DepartmentName");
-           ViewData["StoreID"] = new SelectList(_context.Stores, "StoreID", "StoreLocation");
+           ViewData["StoreID"] = new SelectList(_context.Stores, "StoreID", "StoreID");
             return Page();
         }
 

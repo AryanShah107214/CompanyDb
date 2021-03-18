@@ -23,10 +23,10 @@
                 @Html.DisplayNameFor(model => model.Employee[0].HireDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Employee[0].Department)
+                @Html.DisplayNameFor(model => model.Employee[0].DepartmentID)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Employee[0].Store)
+                @Html.DisplayNameFor(model => model.Employee[0].StoreID)
             </th>
             <th></th>
         </tr>
@@ -44,10 +44,10 @@
                 @Html.DisplayFor(modelItem => item.HireDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Department.DepartmentName)
+                @Html.DisplayFor(modelItem => item.DepartmentID)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Store.StoreLocation)
+                @Html.DisplayFor(modelItem => item.StoreID)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.EmployeeID">Edit</a> |
