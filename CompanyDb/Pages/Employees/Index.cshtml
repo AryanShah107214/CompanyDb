@@ -1,11 +1,11 @@
 ﻿@page
-@model CompanyDb.Pages.NewFolder.IndexModel
+@model CompanyDb.Pages.Employees.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Employees";
 }
 
-<h1>Index</h1>
+<h1>Employees</h1>
 
 <p>
     <a asp-page="Create">Create New</a>
@@ -23,7 +23,10 @@
                 @Html.DisplayNameFor(model => model.Employee[0].HireDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Employee[0].StoreID)
+                @Html.DisplayNameFor(model => model.Employee[0].Department)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Employee[0].Store)
             </th>
             <th></th>
         </tr>
@@ -41,7 +44,10 @@
                 @Html.DisplayFor(modelItem => item.HireDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.StoreID)
+                @Html.DisplayFor(modelItem => item.Department.DepartmentName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Store.StoreLocation)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.EmployeeID">Edit</a> |

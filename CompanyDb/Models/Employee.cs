@@ -20,6 +20,7 @@ namespace CompanyDb.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Hire Date")]
+        
         public DateTime HireDate { get; set; }
         [Display(Name = "Full Name")]
         public string FullName
@@ -29,9 +30,11 @@ namespace CompanyDb.Models
                 return LastName + ", " + First_Middle_Name;
             }
         }
-
+        [Display(Name ="Store Location")]
         public int StoreID { get; set; }
-
+        [Display(Name = "Department Name")]
+        public int DepartmentID { get; set; }
+        public Department Department { get; set; }
         public Store Store { get; set; }
     }
 }

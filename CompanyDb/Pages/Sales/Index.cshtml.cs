@@ -24,7 +24,6 @@ namespace CompanyDb.Pages.Sales
         public async Task OnGetAsync()
         {
             Sale = await _context.Sales
-                .Include(s => s.Employee)
                 .Include(s => s.Store).ToListAsync();
         }
     }

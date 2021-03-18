@@ -14,10 +14,7 @@ namespace CompanyDb.Models
         public string DepartmentName { get; set; }
         [Required]
         public int NumberOfEmployees { get; set; }
-
-        
-        public string StoreID { get; set; }
-        public Store Store { get; set; }
-        
+               
+       
     }
 }

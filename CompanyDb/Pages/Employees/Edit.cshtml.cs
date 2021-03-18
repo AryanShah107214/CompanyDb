@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using CompanyDb.Data;
 using CompanyDb.Models;
 
-namespace CompanyDb.Pages.NewFolder
+namespace CompanyDb.Pages.Employees
 {
     public class EditModel : PageModel
     {
@@ -30,12 +30,16 @@ namespace CompanyDb.Pages.NewFolder
                 return NotFound();
             }
 
-            Employee = await _context.Employees.FirstOrDefaultAsync(m => m.EmployeeID == id);
+            Employee = await _context.Employees
+                .Include(e => e.Department)
+                .Include(e => e.Store).FirstOrDefaultAsync(m => m.EmployeeID == id);
 
             if (Employee == null)
             {
                 return NotFound();
             }
+           ViewData["DepartmentID"] = new SelectList(_context.Departments, "DepartmentID", "DepartmentName");
+           ViewData["StoreID"] = new SelectList(_context.Stores, "StoreID", "StoreLocation");
             return Page();
         }
 

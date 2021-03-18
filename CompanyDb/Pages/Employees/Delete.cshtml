@@ -1,5 +1,5 @@
 ﻿@page
-@model CompanyDb.Pages.NewFolder.DeleteModel
+@model CompanyDb.Pages.Employees.DeleteModel
 
 @{
     ViewData["Title"] = "Delete";
@@ -31,10 +31,16 @@
             @Html.DisplayFor(model => model.Employee.HireDate)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Employee.StoreID)
+            @Html.DisplayNameFor(model => model.Employee.Department)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Employee.StoreID)
+            @Html.DisplayFor(model => model.Employee.Department.DepartmentName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Employee.Store)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Employee.Store.StoreID)
         </dd>
     </dl>
     

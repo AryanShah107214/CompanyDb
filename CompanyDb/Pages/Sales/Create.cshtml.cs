@@ -21,7 +21,6 @@ namespace CompanyDb.Pages.Sales
 
         public IActionResult OnGet()
         {
-        ViewData["EmployeeID"] = new SelectList(_context.Employees, "EmployeeID", "First_Middle_Name");
         ViewData["StoreID"] = new SelectList(_context.Stores, "StoreID", "StoreID");
             return Page();
         }

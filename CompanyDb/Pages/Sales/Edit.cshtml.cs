@@ -31,14 +31,12 @@ namespace CompanyDb.Pages.Sales
             }
 
             Sale = await _context.Sales
-                .Include(s => s.Employee)
                 .Include(s => s.Store).FirstOrDefaultAsync(m => m.SaleID == id);
 
             if (Sale == null)
             {
                 return NotFound();
             }
-           ViewData["EmployeeID"] = new SelectList(_context.Employees, "EmployeeID", "First_Middle_Name");
            ViewData["StoreID"] = new SelectList(_context.Stores, "StoreID", "StoreID");
             return Page();
         }

@@ -30,7 +30,6 @@ namespace CompanyDb.Pages.Sales
             }
 
             Sale = await _context.Sales
-                .Include(s => s.Employee)
                 .Include(s => s.Store).FirstOrDefaultAsync(m => m.SaleID == id);
 
             if (Sale == null)

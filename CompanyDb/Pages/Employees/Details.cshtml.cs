@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using CompanyDb.Data;
 using CompanyDb.Models;
 
-namespace CompanyDb.Pages.NewFolder
+namespace CompanyDb.Pages.Employees
 {
     public class DetailsModel : PageModel
     {
@@ -28,7 +28,9 @@ namespace CompanyDb.Pages.NewFolder
                 return NotFound();
             }
 
-            Employee = await _context.Employees.FirstOrDefaultAsync(m => m.EmployeeID == id);
+            Employee = await _context.Employees
+                .Include(e => e.Department)
+                .Include(e => e.Store).FirstOrDefaultAsync(m => m.EmployeeID == id);
 
             if (Employee == null)
             {

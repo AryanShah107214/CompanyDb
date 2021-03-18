@@ -13,7 +13,6 @@ namespace CompanyDb.Models
         public string StoreLocation { get; set; }
         public string StoreAddress { get; set; }
      
-       
-        public Employee Employee { get; set; }
+       public Employee Employee { get; set; }
     }
 }
