@@ -14,7 +14,8 @@ namespace CompanyDb.Models
         public string DepartmentName { get; set; }
         [Required]
         public int NumberOfEmployees { get; set; }
-               
+        
+        public Employee Employee { get; set; }
        
     }
 }

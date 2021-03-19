@@ -18,6 +18,7 @@ namespace CompanyDb.Models
 
         public decimal ItemCost { get; set; }
 
+        [Display(Name="Store Location")]
         public int StoreID { get; set; }//one store can have many sales/items sold
         
         public Store Store { get; set; }

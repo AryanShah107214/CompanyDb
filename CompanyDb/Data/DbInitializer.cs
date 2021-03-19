@@ -74,11 +74,11 @@ namespace CompanyDb.Data
 
             var departments = new Department[]
             {
-                new Department{DepartmentID=1,DepartmentName="itDept"},
-                new Department{DepartmentID=2,DepartmentName="SalesDept"},
-                new Department{DepartmentID=3,DepartmentName="Marketing"},
-                new Department{DepartmentID=4,DepartmentName="Admin"},
-                new Department{DepartmentID=3,DepartmentName="BoT"},
+                new Department{DepartmentName="Men's Clothing",NumberOfEmployees=5},
+                new Department{DepartmentName="Women's Clothing",NumberOfEmployees=7},
+                new Department{DepartmentName="Children's CLothing",NumberOfEmployees=3},
+                new Department{DepartmentName="Gadgets and Toys",NumberOfEmployees=6},
+                new Department{DepartmentName="Holiday Decorations etc",NumberOfEmployees=2},
 
             };
             context.Departments.AddRange(departments);
