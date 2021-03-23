@@ -68,7 +68,8 @@ namespace CompanyDb.Migrations
 
                     b.HasKey("EmployeeID");
 
-                    b.HasIndex("DepartmentID");
+                    b.HasIndex("DepartmentID")
+                        .IsUnique();
 
                     b.HasIndex("StoreID")
                         .IsUnique();
@@ -121,8 +122,8 @@ namespace CompanyDb.Migrations
             modelBuilder.Entity("CompanyDb.Models.Employee", b =>
                 {
                     b.HasOne("CompanyDb.Models.Department", "Department")
-                        .WithMany()
-                        .HasForeignKey("DepartmentID")
+                        .WithOne("Employee")
+                        .HasForeignKey("CompanyDb.Models.Employee", "DepartmentID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

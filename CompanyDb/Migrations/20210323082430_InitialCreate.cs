@@ -41,8 +41,8 @@ namespace CompanyDb.Migrations
                 {
                     EmployeeID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    LastName = table.Column<string>(maxLength: 50, nullable: false),
                     FirstName = table.Column<string>(maxLength: 50, nullable: false),
+                    LastName = table.Column<string>(maxLength: 50, nullable: false),
                     HireDate = table.Column<DateTime>(nullable: false),
                     StoreID = table.Column<int>(nullable: false),
                     DepartmentID = table.Column<int>(nullable: false)
@@ -88,7 +88,8 @@ namespace CompanyDb.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Employee_DepartmentID",
                 table: "Employee",
-                column: "DepartmentID");
+                column: "DepartmentID",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Employee_StoreID",
