@@ -26,8 +26,8 @@ namespace CompanyDb
                 try
                 {
                     var context = services.GetRequiredService<StoreContext>();
-                     context.Database.EnsureCreated();
-                    //DbInitializer.Initialize(context);
+                    //context.Database.EnsureCreated();
+                    DbInitializer.Initialize(context);
                 }
                 catch (Exception ex)
                 {
