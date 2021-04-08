@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using CompanyDb.Models;
 
 namespace CompanyDb.Data
@@ -21,10 +17,10 @@ namespace CompanyDb.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Department>().ToTable("Department");
             modelBuilder.Entity<Store>().ToTable("Store");
             modelBuilder.Entity<Sale>().ToTable("Sale");
             modelBuilder.Entity<Employee>().ToTable("Employee");
-            modelBuilder.Entity<Department>().ToTable("Department");
         }
 
         

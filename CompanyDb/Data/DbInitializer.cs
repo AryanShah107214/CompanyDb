@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using CompanyDb.Data;
+﻿using CompanyDb.Data;
 using CompanyDb.Models;
+using System;
+using System.Linq;
 
 
 namespace CompanyDb.Data
 {
-    public class DbInitializer
+    public static class DbInitializer
     {
         public static void Initialize(StoreContext context)
         {
-            //context.Database.EnsureCreated();
+            context.Database.EnsureCreated();
 
             // Checks if there are employees
             if (context.Employees.Any())
@@ -58,10 +56,10 @@ namespace CompanyDb.Data
             }
             var sales = new Sale[]
             {
-                new Sale{SaleID=1,SaleName="Iphone 11 Pro Max",ItemCost=1699,StoreID=1},
-                new Sale{SaleID=2,SaleName="Iphone 12 Pro Max",ItemCost=2300,StoreID=3},
-                new Sale{SaleID=3,SaleName="Huawei Mate X2",ItemCost=3599,StoreID=4},
-                new Sale{SaleID=4,SaleName="Samsung Galaxy Note 20 Ultra",ItemCost=1850,StoreID=2},
+                new Sale{SaleID=1,SaleName="Iphone 11 Pro Max",ItemCost=decimal.Parse("1699.99"),StoreID=1},
+                new Sale{SaleID=2,SaleName="Iphone 12 Pro Max",ItemCost=decimal.Parse("2300.99"),StoreID=3},
+                new Sale{SaleID=3,SaleName="Huawei Mate X2",ItemCost=decimal.Parse("3599.99"),StoreID=4},
+                new Sale{SaleID=4,SaleName="Samsung Galaxy Note 20 Ultra",ItemCost=decimal.Parse("1850.99"),StoreID=2},
             };
             context.Sales.AddRange(sales);
             context.SaveChanges();
