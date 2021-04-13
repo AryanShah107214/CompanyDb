@@ -12,19 +12,19 @@ namespace CompanyDb.Data
         {
             context.Database.EnsureCreated();
 
-            // Checks if there are employees
+           // Checks if there are employees
             if (context.Stores.Any())
             {
                 return;   // and if there are, it returns them
             }
 
-             var stores = new Store[]
-            {
+            var stores = new Store[]
+           {
                 new Store{StoreLocation="Onehunga",StoreAddress="5 Brookyln Street"},
                 new Store{StoreLocation="New Lynn",StoreAddress="456343 Cyrus Avenue"},
                 new Store{StoreLocation="Avondale",StoreAddress="954 Sophie Place"},
                 new Store{StoreLocation="Kelston",StoreAddress="6942 Tesla Road "},
-            };
+           };
             context.Stores.AddRange(stores);
             context.SaveChanges();
 
@@ -42,7 +42,7 @@ namespace CompanyDb.Data
 
 
 
-            
+
             var employees = new Employee[]//creates list of employees with their information to include on the website
             {
                 new Employee{First_Middle_Name="Steven",LastName="King",HireDate=DateTime.Parse("2003-06-17"),StoreID=1,DepartmentID=1},
@@ -60,22 +60,7 @@ namespace CompanyDb.Data
 
 
 
-           
 
-
-
-            var sales = new Sale[]
-            {
-                new Sale{SaleName="Iphone 11 Pro Max",ItemCost=decimal.Parse("1699.99"),StoreID=1},
-                new Sale{SaleName="Iphone 12 Pro Max",ItemCost=decimal.Parse("2300.99"),StoreID=3},
-                new Sale{SaleName="Huawei Mate X2",ItemCost=decimal.Parse("3599.99"),StoreID=4},
-                new Sale{SaleName="Samsung Galaxy Note 20 Ultra",ItemCost=decimal.Parse("1850.99"),StoreID=2},
-            };
-            context.Sales.AddRange(sales);
-            context.SaveChanges();
-
-
-            
 
 
         }
