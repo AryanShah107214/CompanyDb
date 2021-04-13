@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CompanyDb.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20210413030216_Initial")]
-    partial class Initial
+    [Migration("20210413202155_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -53,7 +53,6 @@ namespace CompanyDb.Migrations
 
                     b.Property<string>("First_Middle_Name")
                         .IsRequired()
-                        .HasColumnName("FirstName")
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 

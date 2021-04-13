@@ -12,7 +12,6 @@ namespace CompanyDb.Models
         
         [Required]
         [StringLength(50, ErrorMessage = "First name cannot be longer than 50 characters.")]
-        [Column("FirstName")]
         [Display(Name = "First Name")]
         public string First_Middle_Name { get; set; }
         

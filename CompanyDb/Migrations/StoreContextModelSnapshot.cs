@@ -51,7 +51,6 @@ namespace CompanyDb.Migrations
 
                     b.Property<string>("First_Middle_Name")
                         .IsRequired()
-                        .HasColumnName("FirstName")
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
