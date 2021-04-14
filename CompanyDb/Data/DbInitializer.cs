@@ -18,6 +18,19 @@ namespace CompanyDb.Data
                 return;   // and if there are, it returns them
             }
 
+
+            var employees = new Employee[]//creates list of employees with their information to include on the website
+           {
+                new Employee{First_Middle_Name="Steven",LastName="King",HireDate=DateTime.Parse("2003-06-17"),StoreID=1,DepartmentID=1},
+                new Employee{First_Middle_Name="Neena",LastName="Kocchar",HireDate=DateTime.Parse("2007-09-04"),StoreID=1,DepartmentID=5},
+                new Employee{First_Middle_Name="Lex",LastName="De Haan",HireDate=DateTime.Parse("2006-09-03"),StoreID=1,DepartmentID=4},
+                new Employee{First_Middle_Name="Alexander",LastName="Hunold",HireDate=DateTime.Parse("2011-01-12"),StoreID=1,DepartmentID=3},
+                new Employee{First_Middle_Name="Bruce",LastName="Ernest",HireDate=DateTime.Parse("2017-03-04"),StoreID=4,DepartmentID=4},
+                new Employee{First_Middle_Name="David",LastName="Austin",HireDate=DateTime.Parse("2016-03-11"),StoreID=3,DepartmentID=2},
+                new Employee{First_Middle_Name="Valli",LastName="Pataballa",HireDate=DateTime.Parse("2014-02-01"),StoreID=1,DepartmentID=1},
+                new Employee{First_Middle_Name="Nino",LastName="Olivetto",HireDate=DateTime.Parse("2020-03-10"),StoreID=2,DepartmentID=4}
+           }; 
+            
             var stores = new Store[]
            {
                 new Store{StoreLocation="Onehunga",StoreAddress="5 Brookyln Street"},
@@ -40,26 +53,12 @@ namespace CompanyDb.Data
             context.Departments.AddRange(departments);
             context.SaveChanges();
 
+           
 
-
-
-            var employees = new Employee[]//creates list of employees with their information to include on the website
-            {
-                new Employee{First_Middle_Name="Steven",LastName="King",HireDate=DateTime.Parse("2003-06-17"),StoreID=1,DepartmentID=1},
-                new Employee{First_Middle_Name="Neena",LastName="Kocchar",HireDate=DateTime.Parse("2007-09-04"),StoreID=1,DepartmentID=5},
-                new Employee{First_Middle_Name="Lex",LastName="De Haan",HireDate=DateTime.Parse("2006-09-03"),StoreID=1,DepartmentID=4},
-                new Employee{First_Middle_Name="Alexander",LastName="Hunold",HireDate=DateTime.Parse("2011-01-12"),StoreID=1,DepartmentID=3},
-                new Employee{First_Middle_Name="Bruce",LastName="Ernest",HireDate=DateTime.Parse("2017-03-04"),StoreID=4,DepartmentID=6},
-                new Employee{First_Middle_Name="David",LastName="Austin",HireDate=DateTime.Parse("2016-03-11"),StoreID=3,DepartmentID=2},
-                new Employee{First_Middle_Name="Valli",LastName="Pataballa",HireDate=DateTime.Parse("2014-02-01"),StoreID=1,DepartmentID=1},
-                new Employee{First_Middle_Name="Nino",LastName="Olivetto",HireDate=DateTime.Parse("2020-03-10"),StoreID=2,DepartmentID=4}
-            };
+            
 
             context.Employees.AddRange(employees);
             context.SaveChanges();
-
-
-
 
 
 
